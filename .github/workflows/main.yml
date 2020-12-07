@@ -12,4 +12,4 @@ jobs:
         MIDDLE_NAME: Lyhne
         LAST_NAME: Andersen
       run: |
-        echo "The time was ${{ steps.hello.outputs.time }}"
+        echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME.
