@@ -4,7 +4,27 @@
 # https://aka.ms/yaml
 
 trigger:
-- main
+  batch: true
+  branches:
+    include:
+    - main
+    - test
+
+pr:
+  branches:
+    include:
+    - master
+    - test
+
+parameters:
+- name: environment
+  displayName: 'Environment: test or prod'
+  type: string
+  default: none
+  values:
+    - none
+    - test
+    - prod
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -17,3 +37,7 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
+- task: git-tag-on-release-task@9
+  displayName: "Add Tag to git"
+  inputs:
+    staticTagName: "TEST-$(Build.BuildNumber)"
