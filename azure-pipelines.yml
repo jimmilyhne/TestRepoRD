@@ -39,8 +39,6 @@ steps:
   displayName: 'Run a multi-line script'
 - powershell: |
   Write-Host "Tagging Build: $env:BuildNumber"
-  git tag $env:BuildNumber
-  git push origin $env:BuildNumber
 env:
   BuildNumber: $(Build.BuildNumber)
 # - task: git-tag-on-release-task@9
