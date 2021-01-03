@@ -38,8 +38,4 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 - powershell: |
-  Write-Host "Tagging Build:"
-# - task: git-tag-on-release-task@9
-#   displayName: "Add Tag to git"
-#   inputs:
-#     staticTagName: "TEST-$(Build.BuildNumber)"
+  Write-Host "Tagging Build"
