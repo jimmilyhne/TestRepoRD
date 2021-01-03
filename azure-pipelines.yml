@@ -40,7 +40,7 @@ steps:
 - powershell: |
   Write-Host "Tagging Build: $env:BuildNumber"
   env:
-    BuildNumber: 'test'
+    BuildNumber: 42
 # - task: git-tag-on-release-task@9
 #   displayName: "Add Tag to git"
 #   inputs:
