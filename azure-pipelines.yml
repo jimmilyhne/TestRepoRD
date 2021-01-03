@@ -26,28 +26,21 @@ parameters:
     - test
     - prod
 
-extends:
-  template: tagbranch.yml
-  parameters: 
-    buildnumber: variables['Build.BuildNumber']
-
-
 pool:
   vmImage: 'windows-latest'
 
 steps:
-- powershell: |
-    Write-Host "Tagging Build: $env:BuildNumber"
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
 
-    git tag $env:BuildNumber
-    git push origin $env:BuildNumber
+- script: |
+    echo Add other tasks to build, test, and deploy your project.
+    echo See https://aka.ms/yaml
+  displayName: 'Run a multi-line script'
+- powershell: |
+  Write-Host "Tagging Build: $env:BuildNumber"
+
+  git tag $env:BuildNumber
+  git push origin $env:BuildNumber
   env:
     BuildNumber: $(Build.BuildNumber)
-# steps:
-# - script: echo Hello, world!
-#   displayName: 'Run a one-line script'
-
-# - script: |
-#     echo Add other tasks to build, test, and deploy your project.
-#     echo See https://aka.ms/yaml
-#   displayName: 'Run a multi-line script'
