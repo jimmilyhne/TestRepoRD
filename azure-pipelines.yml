@@ -40,11 +40,36 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
-  
+
 - powershell: |
     Write-Host "Tagging Build: $env:BuildNumber"
+    $currentCommit = git rev-parse HEAD # is this correct?
 
     git tag $env:BuildNumber
     git push origin $env:BuildNumber
+
+    $currentDeployedTag = (Invoke-webrequest -URI "https://www.3shape.com/version.txt").Content
+    $currentDeployedCommit = git show-ref -s $currentDeployedTag
+
+    Write-Host "Currently deployed tag and commit:" $currentDeployedTag $currentDeployedCommit
+
+    $username = 'JAndersen'
+    $password = 'VG6NdUpB'
+
+    $bytes = [System.Text.Encoding]::UTF8.GetBytes("$username`:$password")
+    $encodedCredentials = [System.Convert]::ToBase64String($bytes)
+
+    $commits = git log --pretty=oneline "$currentDeployedTag...$currentCommit" --no-decorate --no-merges
+
+    $commits | ForEach-Object {
+        Write-Host $_
+    }
+
+    function Get-JiraIssue {    
+      # We need authentication token
+      param([string] $issueId)
+      return Invoke-RestMethod -Uri "$jira_url/rest/api/latest/issue/$issueId" -Headers @{"Authorization" = "Basic $encodedCredentials" } -ContentType application/json 
+    }
+
   env:
     BuildNumber: $(Build.BuildNumber)
