@@ -30,6 +30,9 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
+- checkout: self
+  persistCredentials: true
+
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
@@ -37,6 +40,7 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
+  
 - powershell: |
     Write-Host "Tagging Build: $env:BuildNumber"
 
