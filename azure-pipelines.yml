@@ -59,7 +59,7 @@ steps:
     $bytes = [System.Text.Encoding]::UTF8.GetBytes("$username`:$password")
     $encodedCredentials = [System.Convert]::ToBase64String($bytes)
 
-    $commits = git log --pretty=oneline "$currentDeployedTag...$currentCommit" --no-decorate --no-merges
+    $commits = git log --pretty=oneline "$currentDeployedCommit...$currentCommit" --no-decorate --no-merges
 
     $commits | ForEach-Object {
         Write-Host $_
