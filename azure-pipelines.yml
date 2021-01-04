@@ -73,3 +73,13 @@ steps:
 
   env:
     BuildNumber: $(Build.BuildNumber)
+- task: GitHubRelease@0
+  displayName: 'Create GitHub Release'      
+  inputs:
+    gitHubConnection: github.com_jimmilyhne
+    repositoryName: '$(Build.Repository.Name)' #jimmilyhne/TestRepoRD
+    tagSource: 'Git tag'
+    tag: $(Build.BuildNumber)      
+    # assets: |
+    #   $(Build.ArtifactStagingDirectory)/*.exe
+    #   $(Build.ArtifactStagingDirectory)/README.txt
