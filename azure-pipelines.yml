@@ -42,5 +42,5 @@ steps:
 
     git tag $env:BuildNumber
     git push origin $env:BuildNumber
-    env:
-      BuildNumber: $(Build.BuildNumber)
+  env:
+    BuildNumber: $(Build.BuildNumber)
