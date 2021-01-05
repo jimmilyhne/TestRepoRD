@@ -76,7 +76,7 @@ steps:
 - task: GitHubRelease@0
   displayName: 'Create GitHub Release'      
   inputs:
-    gitHubConnection: github.com_jimmilyhne
+    gitHubConnection: jimmilyhne
     repositoryName: '$(Build.Repository.Name)' #jimmilyhne/TestRepoRD
     tagSource: 'Git tag'
     tag: $(Build.BuildNumber)      
