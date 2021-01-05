@@ -78,7 +78,7 @@ steps:
   inputs:
     gitHubConnection: github.com_jimmilyhne
     repositoryName: '$(Build.Repository.Name)' #jimmilyhne/TestRepoRD
-    tagSource: 'Git tag'
+    tagSource: 'auto'
     tag: $(Build.BuildNumber)      
     # assets: |
     #   $(Build.ArtifactStagingDirectory)/*.exe
