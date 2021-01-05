@@ -61,12 +61,14 @@ steps:
 
     $commits = git log --pretty=oneline "$currentDeployedCommit...$currentCommit" --no-decorate --no-merges
 
+    $releaselist = @()
+
     $commits | ForEach-Object {
-        Write-Host $_
+        $releaselist += $_
     }
 
     #FromPowershell = "Here is the release notes text from the powershell task"
-    echo "##vso[task.setvariable variable=frompowershellvar]Here is the release notes text from the powershell task"
+    echo "##vso[task.setvariable variable=frompowershellvar]$releaselist"
 
     function Get-JiraIssue {    
       # We need authentication token
