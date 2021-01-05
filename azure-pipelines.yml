@@ -87,7 +87,7 @@ steps:
     #title: # Optional
     releaseNotesSource: 'input' # Optional. Options: file, input
     #releaseNotesFile: # Optional
-    releaseNotes: 'This is the release notes generated from the Azure pipeline' + $(frompowershellvar)
+    releaseNotes: "This is the release notes generated from the Azure pipeline $(frompowershellvar)"
     # assets: |
     #   $(Build.ArtifactStagingDirectory)/*.exe
     #   $(Build.ArtifactStagingDirectory)/README.txt
