@@ -81,7 +81,7 @@ steps:
   displayName: "Create release notes from last deploy up to this deploy"
 - powershell: |
     New-Item .\version.txt
-    Set-Content pathToFile\test.txt '$Build.BuildNumber'
+    Set-Content .\version.txt '$Build.BuildNumber'
   displayName: "Update file containing current build number"
 - task: GitHubRelease@0
   displayName: 'Create GitHub Release'      
