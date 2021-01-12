@@ -67,6 +67,8 @@ steps:
 
     $commits = git log --pretty=oneline "$currentDeployedCommit...$currentCommit" --no-decorate --no-merges --pretty=format:"%ai`t%H`t%an`t%ae`t%s" | ConvertFrom-Csv -Delimiter "`t" -Header ("Commit Date", "Commit Id", "Commit Author", "Commit Email", "Commit Message")
 
+    Write-Host "Got git log of commits"
+
     $commits | ForEach-Object {
         if ($_."Commit Message" -match "(^[a-zA-Z]{2,8}\-[0-9]+)") {
             $jiraIssue = Get-JiraIssue($Matches[0])
@@ -80,6 +82,8 @@ steps:
             Write-Error "No match on $($_."Commit Message")"
         }  
     }
+
+    Write-Host "Checked for commit messages"
 
     $projects = $commits | Select-Object "Jira Project Name", "Jira Project Key" | sort-object -Property "Jira Project Name" -Unique 
     $projects = @($projects)
