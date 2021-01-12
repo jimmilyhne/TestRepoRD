@@ -116,7 +116,9 @@ steps:
         $ticketsTable | Format-Table
         $releaseNotes += $ticketsTable | ConvertTo-Html -Fragment;
     }
-    echo "##vso[task.setvariable variable=frompowershellvar]$releasenotesfromjira"
+
+    $decoded = [System.Web.HttpUtility]::HtmlDecode($releaseNotes);
+    echo "##vso[task.setvariable variable=releasenotesfromjira]$decoded"
 
 
 
