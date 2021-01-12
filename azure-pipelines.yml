@@ -42,6 +42,7 @@ steps:
   displayName: 'Run a multi-line script'
 
 - powershell: |
+    Add-Type -AssemblyName System.Web
     Write-Host "Tagging Build: $env:BuildNumber"
     $currentCommit = git rev-parse HEAD # is this correct?
 
