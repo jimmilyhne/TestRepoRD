@@ -71,6 +71,7 @@ steps:
 
     $commits | ForEach-Object {
         if ($_."Commit Message" -match "(^[a-zA-Z]{2,8}\-[0-9]+)") {
+          Write-Host "Match on $($_."Commit Message")"
             $jiraIssue = Get-JiraIssue($Matches[0])
             $_ | Add-Member -NotePropertyName "Jira Key" -NotePropertyValue $jiraIssue.key
             $_ | Add-Member -NotePropertyName "Jira URL" -NotePropertyValue "$jira_url/browse/$($jiraIssue.key)"
@@ -80,11 +81,11 @@ steps:
         }
         else {
             Write-Host "No match on $($_."Commit Message")"
-            $_ | Add-Member -NotePropertyName "Jira Key" -NotePropertyValue "NoKey"
+            $_ | Add-Member -NotePropertyName "Jira Key" -NotePropertyValue $_."Commit Id"
             $_ | Add-Member -NotePropertyName "Jira URL" -NotePropertyValue ""
-            $_ | Add-Member -NotePropertyName "Jira Summary" -NotePropertyValue ""
+            $_ | Add-Member -NotePropertyName "Jira Summary" -NotePropertyValue $_."Commit Message"
             $_ | Add-Member -NotePropertyName "Jira Project Key" -NotePropertyValue "NoProjectKey"
-            $_ | Add-Member -NotePropertyName "Jira Project Name" -NotePropertyValue "NoProjectName"
+            $_ | Add-Member -NotePropertyName "Jira Project Name" -NotePropertyValue "Not related to Jira"
         }  
     }
 
