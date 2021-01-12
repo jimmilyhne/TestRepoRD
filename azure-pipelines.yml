@@ -51,7 +51,7 @@ steps:
     function Get-JiraIssue {    
       # We need authentication token
       param([string] $issueId)
-      return Invoke-RestMethod -Uri "$jira_url/rest/api/latest/issue/$issueId" -Headers @{"Authorization" = "Basic $encodedCredentials" } -ContentType application/json 
+      return Invoke-RestMethod -Uri "https://jira.3shape.com/rest/api/latest/issue/$issueId" -Headers @{"Authorization" = "Basic $encodedCredentials" } -ContentType application/json 
     }
 
     $currentDeployedTag = (Invoke-webrequest -URI "https://www.3shape.com/currentbuildtag.txt").Content
