@@ -79,7 +79,12 @@ steps:
             $_ | Add-Member -NotePropertyName "Jira Project Name" -NotePropertyValue $jiraIssue.fields.project.name
         }
         else {
-            Write-Error "No match on $($_."Commit Message")"
+            Write-Host "No match on $($_."Commit Message")"
+            $_ | Add-Member -NotePropertyName "Jira Key" -NotePropertyValue "NoKey"
+            $_ | Add-Member -NotePropertyName "Jira URL" -NotePropertyValue ""
+            $_ | Add-Member -NotePropertyName "Jira Summary" -NotePropertyValue ""
+            $_ | Add-Member -NotePropertyName "Jira Project Key" -NotePropertyValue "NoProjectKey"
+            $_ | Add-Member -NotePropertyName "Jira Project Name" -NotePropertyValue "NoProjectName"
         }  
     }
 
